@@ -7,9 +7,10 @@ public class NewNgame {
         Scanner scanner = new Scanner(System.in);
         int [] Exam = new int[10];
         int [] Guess = new int[10];
-        int wrong[][] = new int[2][10];
+        int [][] wrong = new int[10][2];
         while (true) {
             int correct = 0;
+            int wrongA = 0;
             for (int n = 0; n < Exam.length; n++) {
                 int b = a.nextInt(10, 100);
                 int c = a.nextInt(10, 100);
@@ -21,11 +22,33 @@ public class NewNgame {
                 if (Exam[n] == Guess[n]) {
                     correct++;
                 }
+                else {
+                    wrong[wrongA][0] = b;
+                    wrong[wrongA][1] = c;
+                    wrongA++;
+                }
             }
-            System.out.println("성적 " + correct +"/10" + "점");
-            System.out.println("오답");
+            System.out.println("성적 " + correct + "점");
+            if (wrongA > 0) {
+                System.out.println("오답");
+                for (int i = 0; i < wrongA; i++) {
+                    int b = wrong[i][0];
+                    int c = wrong[i][1];
+                    int Scorrect = b + c;
+                    System.out.print(b + " + " + c + " = " + " ? " + "--> ");
+                    int Second = scanner.nextInt();
+
+                    if (Second == Scorrect) {
+                        System.out.println("통과!");
+                    }
+                    else {
+                        System.out.println("두 번 틀리는건 빡대가리");
+                    }
+                }
+            }
             System.out.print("다시 시작하시겠습니까?(y/n) >> ");
             if (scanner.next().equals("n")) break;
         }
+        }
     }
-}
+
